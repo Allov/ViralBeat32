@@ -1,7 +1,7 @@
 define(["virality"], function(v) {
     var lastUpdate = Date.now();
 
-    v.components({
+    v.add({
         name: "heartbeat",
         update: function(elapsed) {
             var current = Date.now();

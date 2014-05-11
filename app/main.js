@@ -1,5 +1,5 @@
-define(["virality", "components/heartbeat", "components/fps", "components/stage", "components/starfield"],
-    function(v, h, FpsCounter, Stage, Starfield) {
+define(["virality", "entities/heartbeat", "entities/fpscounter", "entities/starfield", "entities/stage"],
+    function(v, h, FpsCounter, Starfield, Stage) {
     
         // Starting Virality.
         v.config({ debug: true })
@@ -7,9 +7,11 @@ define(["virality", "components/heartbeat", "components/fps", "components/stage"
          .background("#000")
          .start();
         
-        v.components(new Starfield({ size: 16, starCount: 50}));
-        v.components(new Stage());
-        v.components(new FpsCounter());
+        //v.components(new Starfield({ size: 16, starCount: 50}));
+        //v.components(new Stage());
+        
+        v.add(new Stage());
+        v.add(new FpsCounter());
         var pauseSound = v.load("pause.wav");
          
         // Handles pause and unpause.

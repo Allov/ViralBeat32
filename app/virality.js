@@ -4,7 +4,7 @@ define([], function() {
         window.webkitRequestAnimationFrame ||
         window.mozRequestAnimationFrame ||
         window.msRequestAnimationFrame ||
-        window.oRequestAnimationFrame;        
+        window.oRequestAnimationFrame;
 
     var canvas,
         buffer,
@@ -14,7 +14,7 @@ define([], function() {
         fpsCurrent = 0,
         fpsCount = 0,
         elapsedTime = 0,
-        components = [],
+        entities = [],
         assets = [],
         pause = false;;
 
@@ -56,30 +56,23 @@ define([], function() {
             return virality;
         },
         update: function(elapsed) {
-            for(var i in components) {
-                if (components[i].update) {
-                    components[i].update(elapsed);
-                }
-            }
-        },
-        render: function(elapsed) {
             contextBuffer.clearRect(0, 0, options.viewport.w, options.viewport.h);
             contextBuffer.fillStyle = options.background;
             contextBuffer.fillRect(0, 0, options.viewport.w, options.viewport.h);
-            
-            for(var i in components) {
-                if (components[i].render) {
-                    components[i].render(contextBuffer, elapsed);
+
+            for(var i in entities) {
+                if (entities[i].update) {
+                    entities[i].update(contextBuffer, elapsed);
                 }
             }
-            
+
             context.drawImage(buffer, 0, 0, options.viewport.w, options.viewport.h);
         },
         start: function() {
             requestAnimationFrame(loop);
             return virality;
         },
-        background: function(color) { 
+        background: function(color) {
             options.background = color;
             return virality;
         },
@@ -133,34 +126,34 @@ define([], function() {
                 }
             }
         },
-        components: function(component) {
-            if (component.name) {
-                virality.log("Adding: " + component.name, "components");
+        add: function(entity) {
+            if (entity.name) {
+                virality.log("Adding: " + entity.name, "entity");
             }
-            components.push(component);
+            entities.push(entity);
             
-            if (component.init) {
-                component.init();
+            if (entity.init) {
+                entity.init();
             }
 
-            if (component.systems && component.systems.length > 0) {
-                for(var i in component.systems) {
-                    var name = component.systems[i];
-                    if (!components[name]) {
-                        components[name] = [];
+            if (entity.systems && entity.systems.length > 0) {
+                for(var i in entity.systems) {
+                    var name = entity.systems[i];
+                    if (!entities[name]) {
+                        entities[name] = [];
                     }
                     
-                    components[name].push(component);
+                    entities[name].push(entity);
                 }
             }
 
-            return component;
+            return entity;
         },
         assets: assets,
         viewport: options.viewport,
-        log: function(message, component) {
+        log: function(message, entity) {
             if (options.debug && console) {
-                console.log({ message: message, component: component });
+                console.log({ message: message, entity: entity });
             }
         },
         pause: function() {
@@ -174,7 +167,7 @@ define([], function() {
                         assets[i].play();
                     }
                 }
-            }                
+            }
         },
         isPaused: function() {
             return pause;
@@ -191,7 +184,6 @@ define([], function() {
 
         if (!pause) {
             virality.update(elapsed);
-            virality.render(elapsed);
         }
 
         fpsCount++;
