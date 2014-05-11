@@ -143,6 +143,17 @@ define([], function() {
                 component.init();
             }
 
+            if (component.systems && component.systems.length > 0) {
+                for(var i in component.systems) {
+                    var name = component.systems[i];
+                    if (!components[name]) {
+                        components[name] = [];
+                    }
+                    
+                    components[name].push(component);
+                }
+            }
+
             return component;
         },
         assets: assets,

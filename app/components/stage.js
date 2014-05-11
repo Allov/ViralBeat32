@@ -25,7 +25,7 @@ define(["virality", "components/font", "components/line", "components/ship", "co
             }
 
             var audio = v.load("chip2.ogg");
-            audio.volume = 0.7;
+            audio.volume = 0.5;
             audio.play();
         }
 
