@@ -16,6 +16,7 @@ define([], function() {
     
     var input = {
         update: function(entity) {
+            input.enabled = entity.visible;
             if (shoot) {
                 entity.shoot();
             }

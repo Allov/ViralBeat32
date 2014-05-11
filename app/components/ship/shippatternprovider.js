@@ -26,11 +26,11 @@ define([], function() {
         self.idle = function() {
             return shipPattern;
         }
-       
+
         self.moving = function() {
             return shipMovingPattern;
         }
-       
+
         self.size = size || 16;
         self.color = color || "#fff";
     }

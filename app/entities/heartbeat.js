@@ -3,6 +3,7 @@ define(["virality"], function(v) {
 
     v.add({
         name: "heartbeat",
+        visible: true,
         update: function(elapsed) {
             var current = Date.now();
             

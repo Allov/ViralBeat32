@@ -1,4 +1,4 @@
-define(["components/pattern"], function(Pattern) {
+define([], function() {
     var characters = {
         a: [
         "xxxx ",
@@ -396,27 +396,11 @@ define(["components/pattern"], function(Pattern) {
         ]
     };
 
-    var font = function(s, size, color) {
+    var font = function() {
         var self = this;
-        var patterns = [];
 
-        for(var c in characters) {
-            patterns[c] = new Pattern(characters[c], 16, color);
-        }
-
-        var textCanvas = document.createElement("canvas");
-        textCanvas.width = s.length * size * 6;
-        var textContext = textCanvas.getContext("2d");
-        
-        var spacing = 0;
-        for(var i = 0; i < s.length; i++) {
-            patterns[s.charAt(i)].setPattern(characters[s.charAt(i)]);
-            patterns[s.charAt(i)].draw(textContext, spacing, 0);
-            spacing += 6;
-        }
-
-        self.draw = function(context, x, y) {
-            context.drawImage(textCanvas, x * size, y * size);
+        self.patterns = function() {
+            return characters;
         }
     };
 

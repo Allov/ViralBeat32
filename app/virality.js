@@ -61,7 +61,7 @@ define([], function() {
             contextBuffer.fillRect(0, 0, options.viewport.w, options.viewport.h);
 
             for(var i in entities) {
-                if (entities[i].update) {
+                if (entities[i].update && entities[i].visible) {
                     entities[i].update(contextBuffer, elapsed);
                 }
             }
@@ -148,6 +148,13 @@ define([], function() {
             }
 
             return entity;
+        },
+        entities: function(system) {
+            if (!system) {
+                return entities[system];
+            }
+
+            return entities;
         },
         assets: assets,
         viewport: options.viewport,

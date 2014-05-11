@@ -8,6 +8,7 @@ define(["virality"], function(v) {
         };
         
         self.name = "fpsCounter";
+        self.visible = true;
         self.config = function(settings) {
             for(var i in settings) {
                 options[i] = settings[i];

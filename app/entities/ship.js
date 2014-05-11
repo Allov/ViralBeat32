@@ -1,19 +1,25 @@
-define(["components/pattern"], function(Pattern) {
+define([], function() {
     
     var projectilePattern = ["x"];
 
     var date = Date.now();
 
-    var ship = function(pattern, input, mover, physic) {
+    var ship = function(graphic, input, mover, physic) {
 
         var projectiles = [],
             shielded = false,
             position = {x: 0, y: 0},
             velocity = {x: 0, y: 0},
-            speed = 0.05;
+            dimensions = {w: 7, h: 7},
+            speed = 0.05,
+            visible = true;
 
         var self = this;
         
+        self.name = "Ship";
+        self.visible = visible;
+        self.systems = ["physic"];
+
         self.moving = function() {
             return self.velocity.y !== 0 || self.velocity.x !== 0;
         };
@@ -21,6 +27,7 @@ define(["components/pattern"], function(Pattern) {
         self.position = position;
         self.velocity = velocity;
         self.speed = speed;
+        self.dimensions = dimensions;
         
         self.shoot = function() {
             
@@ -33,8 +40,8 @@ define(["components/pattern"], function(Pattern) {
         self.update = function(context, elapsed) {
             input.update(self);
             mover.update(self, elapsed);
-            //physic.update(self);
-            pattern.update(context, self);
+            physic.update(self);
+            graphic.update(self, context);
         };
     }
 

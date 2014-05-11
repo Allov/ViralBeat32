@@ -22,13 +22,14 @@ define(["virality"], function(v) {
     
     var layerCount = 3,
         options = {
-            starCount: 100
+            starCount: 50
         };
         
     var starfield = function(settings) {
         var self = this;
 
         self.name = "Starfield";
+        self.visible = true;
 
         self.config = function(settings) {
             for(var i in settings) {
@@ -74,7 +75,7 @@ define(["virality"], function(v) {
             }
         }
 
-        self.render = function(context, elapsed) {
+        self.update = function(context, elapsed) {
             for(var i in layers) {
                 layersPosition[i].x += layersVelocity[i] * elapsed;
 
