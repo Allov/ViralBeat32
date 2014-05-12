@@ -1,13 +1,8 @@
 define([], function() {
     
-    var projectilePattern = ["x"];
+    var ship = function(graphic, input, physic) {
 
-    var date = Date.now();
-
-    var ship = function(graphic, input, mover, physic) {
-
-        var projectiles = [],
-            shielded = false,
+        var shielded = false,
             position = {x: 0, y: 0},
             velocity = {x: 0, y: 0},
             dimensions = {w: 7, h: 7},
@@ -38,8 +33,7 @@ define([], function() {
         }
 
         self.update = function(context, elapsed) {
-            input.update(self);
-            mover.update(self, elapsed);
+            input.update(self, elapsed);
             physic.update(self);
             graphic.update(self, context);
         };

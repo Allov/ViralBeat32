@@ -15,7 +15,7 @@ define([], function() {
         velocity = {x: 0, y: 0};
     
     var input = {
-        update: function(entity) {
+        update: function(entity, elapsed) {
             input.enabled = entity.visible;
             if (shoot) {
                 entity.shoot();
@@ -28,6 +28,9 @@ define([], function() {
            
             entity.velocity.x = velocity.x * entity.speed;
             entity.velocity.y = velocity.y * entity.speed;
+            
+            entity.position.x += entity.velocity.x * elapsed;
+            entity.position.y += entity.velocity.y * elapsed;
         },
         enabled: true
     };
