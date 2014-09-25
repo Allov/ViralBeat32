@@ -29,7 +29,7 @@ define(["virality","entities/ship", "components/movingpattern", "components/ship
 
         v.add(mainShip);
         v.add(ennemy);
-        v.add(text);
+        //v.add(text);
 
         self.update = function() {
             var current = Date.now();
