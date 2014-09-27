@@ -13,6 +13,9 @@ define(["virality",
         v.add(new Stage());
         v.add(new FpsCounter());
 
+        // var song = v.load("chip2.ogg");
+        // song.play();
+        
         var pauseSound = v.load("pause.wav");
          
         // Handles pause and unpause.

@@ -1,11 +1,12 @@
 define([], function() {
     
-    var ship = function(graphic, input, physic) {
+    var ship = function(graphic, input, physic, weapon) {
 
         var shielded = false,
             position = {x: 0, y: 0},
             velocity = {x: 0, y: 0},
             dimensions = {w: 7, h: 7},
+            direction = {x: 1, y: 0},
             speed = 0.05,
             visible = true;
 
@@ -22,10 +23,11 @@ define([], function() {
         self.position = position;
         self.velocity = velocity;
         self.speed = speed;
+        self.direction = direction;
         self.dimensions = dimensions;
         
         self.shoot = function() {
-            
+            weapon.shoot(self);
         }
         
         self.useShield = function() {

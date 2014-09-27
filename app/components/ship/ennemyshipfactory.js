@@ -15,6 +15,8 @@ define(["entities/ship",
             ennemy.speed = 0.005;
             ennemy.position.x = x;
             ennemy.position.y = y;
+            ennemy.direction.x = -1;
+            ennemy.direction.y = 0;
             ennemy.visible = true;
             
             return ennemy;
