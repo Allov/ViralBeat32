@@ -58,10 +58,10 @@ define(["virality"], function(v) {
                     var x = Math.floor((Math.random() * layers[j].width) + 1);
                     var y = Math.floor((Math.random() * layers[j].height) + 1);
 
-                    x = x >> 5;
-                    x = x << 5;
-                    y = y >> 5;
-                    y = y << 5;
+                    x = x >> 2;
+                    x = x << 2;
+                    y = y >> 2;
+                    y = y << 2;
                     
                     if (v.viewport.w - x <= starsSpec[j].w) { x -= v.viewport.w - starsSpec[j].w }
                     if (x <= starsSpec[j].w) { x += starsSpec[j].w }

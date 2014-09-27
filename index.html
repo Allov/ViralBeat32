@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>Viral Beat</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <script src="app/libs/require.js" data-main="app/main"></script>
     <script>
         requirejs.config({
@@ -9,11 +11,19 @@
         });
     </script>
 </head>
-<body>
-    <div>
-        <button id="pause">Pause</button>
-        <button id="mute">Mute</button>
-        <button id="unmute">Unmute</button>
+<body style="background: #001; color: #CCD">
+    <div style="padding: 50px; text-align: center;">
+        <h1>Viralbeat</h1>
+        <p>Welcome to Viralbeat. This is a <strong>pre-alpha</strong> version of the game.
+    </div>
+    
+    <div style="text-align: center; border: 2px solid #ccd; margin: 5px 50px 5px 50px; min-width: 512px;">
+        <canvas id="game-area">
+    </div>
+    <div style="text-align: center;">
+        <button id="pause" class="btn btn-lg btn-primary">Pause</button>
+        <button id="mute" class="btn btn-lg">Mute</button>
+        <button id="unmute" class="btn btn-lg">Unmute</button>
     </div>
 </body>
 </html>

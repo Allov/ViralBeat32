@@ -1,15 +1,16 @@
-define(["virality", "entities/heartbeat", "entities/fpscounter", "entities/starfield", "game/stage"],
-    function(v, h, FpsCounter, Starfield, Stage) {
+define(["virality",
+        "entities/heartbeat",
+        "entities/fpscounter",
+        "game/stage"],
+    function(v, h, FpsCounter, Stage) {
     
         // Starting Virality.
         v.config({ debug: true })
-         .init(512, 512)
+         .init(512, 288, "game-area")
          .background("#000")
          .start();
         
-        v.add(new Starfield({ size: 16, starCount: 50}));
         v.add(new Stage());
-
         v.add(new FpsCounter());
 
         var pauseSound = v.load("pause.wav");

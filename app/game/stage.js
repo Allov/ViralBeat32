@@ -1,8 +1,11 @@
-define(["virality","entities/ship", "components/movingpattern", "components/ship/shipkeyboardinput",
-        "components/ship/shippatternprovider", "components/ship/shipphysic", "components/fontpatternprovider", "components/textpattern",
-        "entities/text", "components/ennemy/ennemypatternprovider", "components/ennemy/ennemyaiinput"],
-    function(v, Ship, MovingPattern, KeyboardInput, ShipPatternProvider, ShipPhysic,
-            FontPatternProvider, TextPattern, Text, EnnemyPatternProvider, EnnemyAiInput) {
+define(["virality",
+        "components/fontpatternprovider",
+        "components/textpattern",
+        "entities/text",
+        "entities/starfield",
+        "components/ship/playershipfactory",
+        "components/ship/ennemyshipfactory"],
+    function(v, FontPatternProvider, TextPattern, Text, Starfield, PlayerShipFactory, EnnemyShipFactory) {
 
     var stage = function() {
         var self = this;
@@ -11,22 +14,18 @@ define(["virality","entities/ship", "components/movingpattern", "components/ship
         self.visible = true;
 
         var date = Date.now();
-        var mainShip = new Ship(new MovingPattern(new ShipPatternProvider()),
-                                KeyboardInput,
-                                new ShipPhysic({w: 32, h: 32}));
-        mainShip.visible = false;
         
-        var ennemy = new Ship(new MovingPattern(new EnnemyPatternProvider(16, "#f00")),
-                                new EnnemyAiInput(31, 16),
-                                new ShipPhysic({w: 32, h: 32}));
-        ennemy.speed = 0.005;
-        ennemy.position.x = 31;
-        ennemy.position.y = 16;
-        ennemy.visible = false;
+        var playerShipFactory = new PlayerShipFactory();
+        var mainShip = playerShipFactory.spawn(0, 0);
+        
+        var ennemyShipFactory = new EnnemyShipFactory();
+        var ennemy = ennemyShipFactory.spawn(127, 36);
+
                                 
         var text = new Text(new TextPattern(new FontPatternProvider()),
                             "stage", 1, 12, "#fff");
 
+        v.add(new Starfield({ size: 4, starCount: 150}));
         v.add(mainShip);
         v.add(ennemy);
         //v.add(text);
