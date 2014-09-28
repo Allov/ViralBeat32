@@ -1,10 +1,12 @@
-define(["entities/ship",
+define(["virality",
+        "entities/ship",
+        "entities/boundingbox",
         "components/movingpattern",
         "components/ship/keyboardinput",
         "components/ship/playerpatternprovider",
         "components/ship/shipphysic",
         "components/ship/plasmaweapon"],
-    function(Ship, MovingPattern, KeyboardInput, ShipPatternProvider, ShipPhysic, PlasmaWeapon) {
+    function(v, Ship, BoundingBox, MovingPattern, KeyboardInput, ShipPatternProvider, ShipPhysic, PlasmaWeapon) {
             
     var factory = function() {
         var self = this;
@@ -15,6 +17,11 @@ define(["entities/ship",
                                     new ShipPhysic({w: 128, h: 72}),
                                     new PlasmaWeapon());
             ship.visible = false;
+            ship.name = "player1";
+            
+            var boundingbox = new BoundingBox(ship, "#0f0");
+            boundingbox.name = ship.name + "-bounding-box";
+            v.add(boundingbox);
             return ship;
         }
     }

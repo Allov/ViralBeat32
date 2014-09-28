@@ -16,7 +16,7 @@ define([], function() {
         elapsedTime = 0,
         entities = [],
         assets = [],
-        pause = false;;
+        pause = false;
 
     var options = {
         viewport: {},
@@ -59,11 +59,22 @@ define([], function() {
             contextBuffer.clearRect(0, 0, options.viewport.w, options.viewport.h);
             contextBuffer.fillStyle = options.background;
             contextBuffer.fillRect(0, 0, options.viewport.w, options.viewport.h);
-
+            
+            var toRemove = [];
             for(var i in entities) {
-                if (entities[i].update && entities[i].visible) {
-                    entities[i].update(contextBuffer, elapsed);
+                var current = entities[i];
+                
+                if (current.update && current.visible) {
+                    current.update(contextBuffer, elapsed);
                 }
+                
+                if (current.destroyed) {
+                    toRemove.push(i);
+                }
+            }
+            
+            for(var i in toRemove) {
+                entities.splice(toRemove[i], 1);
             }
 
             context.drawImage(buffer, 0, 0, options.viewport.w, options.viewport.h);
@@ -91,11 +102,11 @@ define([], function() {
             var isAudio = path.match(/.*\.(mp3|ogg|wav)/g);
             var isImage = path.match(/.*\.(jpg|gif|png)/g);
             
+            var media;
             if (!assets[asset.name]) {
-                var media;
                 if (isAudio) {
                     virality.log("Loading audio asset: " + asset.name + "[" + path + "]", "loader");
-                    var media = new Audio();
+                    media = new Audio();
                     media.src = path;
                     
                     assets[asset.name] = media;
@@ -103,7 +114,7 @@ define([], function() {
                 
                 if (isImage) {
                     virality.log("Loading image asset: " + asset.name + "[" + path + "]", "loader");
-                    var media = new Image();
+                    media = new Image();
                     media.src = path;
                     
                     assets[asset.name] = media;
@@ -150,11 +161,25 @@ define([], function() {
             return entity;
         },
         entities: function(system) {
-            if (!system) {
+            if (system) {
                 return entities[system];
             }
 
             return entities;
+        },
+        collide: function(a, b, gridSize) {
+            var left = b.position.x - b.dimensions.w / 2;
+            var right = b.position.x + b.dimensions.w / 2;
+            var top = b.position.y - b.dimensions.h / 2;
+            var bottom = b.position.y + b.dimensions.h / 2;
+            
+            if (a.position.x < left) return false;
+            if (a.position.x > right) return false;
+            if (a.position.y < top) return false;
+            if (a.position.y > bottom) return false;
+            
+            return true;
+            //return a.position.x >= left && a.position.x <= right && a.position.y <= bottom && a.position.y >= top;
         },
         assets: assets,
         viewport: options.viewport,

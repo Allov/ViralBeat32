@@ -12,7 +12,7 @@ define([], function() {
        
         self.name = "Projectile";
         self.visible = visible;
-        self.systems = ["physic"];
+        self.systems = ["physic", "projectile"];
 
         self.position = position;
         self.velocity = velocity;

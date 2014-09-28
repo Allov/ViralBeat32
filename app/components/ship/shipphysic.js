@@ -24,6 +24,17 @@ define(["virality"], function(v) {
         if (entity.position.y >= gridSize.h - entity.dimensions.h) {
             entity.position.y = gridSize.h - entity.dimensions.h;
         }
+        
+        var entities = v.entities("projectile");
+        for(var i in entities) {
+            var current = entities[i];
+            
+            if (current.owner != entity && v.collide(current, entity, gridSize)) {
+                console.log(current);
+                console.log(entity);
+                current.destroyed = entity.destroyed = true;
+            }
+        }
     }
 
     return physic;

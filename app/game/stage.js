@@ -15,19 +15,22 @@ define(["virality",
 
         var date = Date.now();
         
+        v.add(new Starfield({ size: 4, starCount: 150}));
+
         var playerShipFactory = new PlayerShipFactory();
         var mainShip = playerShipFactory.spawn(0, 0);
+        v.add(mainShip);
         
         var ennemyShipFactory = new EnnemyShipFactory();
-        var ennemy = ennemyShipFactory.spawn(127, 36);
+        
+        for(var i = 0; i < 10; i++) {
+            var ennemy = ennemyShipFactory.spawn(127, 10+i*5);
+            v.add(ennemy);
+        }
 
                                 
         var text = new Text(new TextPattern(new FontPatternProvider()),
                             "stage", 1, 12, "#fff");
-
-        v.add(new Starfield({ size: 4, starCount: 150}));
-        v.add(mainShip);
-        v.add(ennemy);
         //v.add(text);
 
         self.update = function() {

@@ -1,9 +1,21 @@
+# General concept
+* Players start a new game with ~5 randomly generated stage.
+* Each stage takes 2-5 minutes to clear.
+* Each stage consist of 1-4 mini-boss and 1 boss.
+* Beating the boss of a stage unlocks the next stage.
+
 # Game mechanics (concept)
 * Main ships have a weapon slot and shield slot.
 * Main ships don't gain xp or level, but gain upgrade through enchancers.
 * All main ships gets the enchancer bonus once activated.
-* Ennemies drops armor refills randomly.
-* Mini boss and boss will drop enhancers, weapon and shield randomly.
+* Ennemies drop currency (xp?) that can be used to buy weapons, shield and abilities.
+    * Small ennemy 1 xp;
+    * Larger ennemy 3-5 xp;
+    * Mini-boss 25-50 xp;
+    * Boss 200 xp;
+* Ennemies drop armor refills randomly.
+* Mini boss and boss will drop enhancers.
+*
 * Streak gives temporary bonuses.
 * Each entity collision, either projectile or ennemy ships, will remove 1 armor from the ship colliding. Need to clarify how multiple ship collision will work:
     * Do the ennemy ship is destroyed upon impact or it also lose 1 armor?
@@ -27,4 +39,4 @@
 # Shields (example)
 > Shields should probably give small fun buffs that replenishes through time?
 
-* Lightning shield: 
+* Lightning shield:

@@ -34,7 +34,7 @@
 > The time tinker is able to bend time and use it to his advantages.
 
 ### Stats
-1 armor
+2 armor
 
 #### Time lock (Active, 30 seconds cooldown)
 > Creates a sphere at the Time Tinker's position that has X radius slowing ANYTHING inside the sphere by 50 + (`FACTOR` * 10)%.
@@ -44,3 +44,15 @@
 
 #### Backtrack (Active, 30 seconds cooldown)
 > Goes back in time returning to the Time tinker's state 5 + `FACTOR` seconds ago. Cooldowns won't resets.
+
+## The scientist (?)
+> The scientist has powerful AOE attacks.
+
+### Stats
+1 armor
+
+#### EMP (Active, 30 seconds cooldown)
+> Launch an EMP device that explodes disabling all ennemy shields.
+
+#### Phase shift (Active, 1 + `FACTOR` charge, 15 seconds replenish cooldown)
+> Disapear for a brief time from the screen to reappear at a random location. An explosion of (5 + `FACTOR`) radius occurs at the reappearance location oblitarating anything around.

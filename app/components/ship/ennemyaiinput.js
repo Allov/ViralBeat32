@@ -19,7 +19,7 @@ define([], function() {
                 //entity.velocity.y = TODO
                
                 entity.position.x += entity.velocity.x * elapsed;
-                entity.position.y = (Math.sin(entity.position.x) * 4 + y);
+                //entity.position.y = (Math.sin(entity.position.x) * 4 + y);
                
             }
         }
