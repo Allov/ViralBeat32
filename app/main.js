@@ -1,8 +1,7 @@
 define(["virality",
-        "entities/heartbeat",
         "entities/fpscounter",
         "game/stage"],
-    function(v, h, FpsCounter, Stage) {
+    function(v, FpsCounter, Stage) {
     
         // Starting Virality.
         v.config({ debug: true })
@@ -13,8 +12,8 @@ define(["virality",
         v.add(new Stage());
         v.add(new FpsCounter());
 
-        // var song = v.load("chip2.ogg");
-        // song.play();
+        var song = v.load("chip2.ogg");
+        song.play();
         
         var pauseSound = v.load("pause.wav");
          

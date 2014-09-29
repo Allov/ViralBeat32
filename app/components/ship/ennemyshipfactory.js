@@ -4,8 +4,10 @@ define(["virality",
         "components/movingpattern",
         "components/ship/ennemypatternprovider",
         "components/ship/ennemyaiinput",
-        "components/ship/shipphysic"],
-    function(v, Ship, BoundingBox, MovingPattern, EnnemyPatternProvider, EnnemyAiInput, ShipPhysic) {
+        "components/ship/shipphysic",
+        "components/ship/plasmaweapon",
+        "components/ship/defaultshipsound"],
+    function(v, Ship, BoundingBox, MovingPattern, EnnemyPatternProvider, EnnemyAiInput, ShipPhysic, PlasmaWeapon, DefaultShipSound) {
 
     var factory = function() {
         var self = this;
@@ -14,7 +16,9 @@ define(["virality",
         this.spawn = function(x, y) {
             var ennemy = new Ship(new MovingPattern(new EnnemyPatternProvider(4, "#f00")),
                                     new EnnemyAiInput(x, y),
-                                    new ShipPhysic({w: 128, h: 72}));
+                                    new ShipPhysic({w: 128, h: 72}),
+                                    new PlasmaWeapon(),
+                                    DefaultShipSound);
                                     
             ennemy.dimensions.w = 3;
             ennemy.dimensions.h = 3;
@@ -29,8 +33,10 @@ define(["virality",
             
             var boundingbox = new BoundingBox(ennemy, "#f00");
             boundingbox.name = ennemy.name + "-bounding-box";
+            
+            v.add(ennemy);
             v.add(boundingbox);
-
+            
             return ennemy;
         };
     };

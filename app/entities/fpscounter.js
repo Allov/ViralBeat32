@@ -17,7 +17,7 @@ define(["virality"], function(v) {
         self.update = function(context, elapsed) {
             context.font = "30px Trebuchet MS";
             context.fillStyle = 'white';
-            context.fillText(v.fps() + " FPS", options.x, options.y);
+            context.fillText(v.fps() + " FPS (" + v.entities().length + ")", options.x, options.y);
         };
         
         self.config(settings);

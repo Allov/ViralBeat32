@@ -21,8 +21,12 @@ define([], function() {
         
         self.update = function(context, elapsed) {
             input.update(self, elapsed);
-            //physic.update(self);
+            physic.update(self);
             graphic.update(self, context);
+        };
+        
+        self.destroy = function() {
+            self.destroyed = true;
         };
    };
    

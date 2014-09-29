@@ -1,12 +1,13 @@
-define([], function() {
+define(["virality"], function(v) {
    
     var keys = {
         up: [38],
         down: [40],
         left: [37],
         right: [39],
-        shoot: [68, 100],
-        shield: [70, 102]
+        shoot: ["d".charCodeAt(), "D".charCodeAt()],
+        shield: ["f".charCodeAt(), "F".charCodeAt()],
+        debug: ["P".charCodeAt()]
     };
     
     var shoot = false,
@@ -50,6 +51,10 @@ define([], function() {
 
         if (key == keys.shield[0] || key == keys.shield[1]) {
             useShield = true;
+        }
+        
+        if (key == keys.debug[0]) {
+            v.toggleDebug();
         }
 
         if (key == keys.up[0] && velocity.y < 0) {

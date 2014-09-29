@@ -10,8 +10,8 @@ define(["components/patternbuffer"], function(PatternBuffer) {
 
         self.update = function(entity, context) {
             projectile.draw(context, entity.position.x, entity.position.y);
-        }
-       
+        };
+
     };
    
     return provider;

@@ -1,6 +1,6 @@
 define([], function() {
     
-    var ship = function(graphic, input, physic, weapon) {
+    var ship = function(graphic, input, physic, weapon, sound) {
 
         var shielded = false,
             position = {x: 0, y: 0},
@@ -32,6 +32,11 @@ define([], function() {
         
         self.useShield = function() {
             shielded = s;
+        }
+        
+        self.destroy = function() {
+            self.destroyed = true;
+            sound.destroyed();
         }
 
         self.update = function(context, elapsed) {

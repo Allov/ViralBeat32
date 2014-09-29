@@ -30,9 +30,8 @@ define(["virality"], function(v) {
             var current = entities[i];
             
             if (current.owner != entity && v.collide(current, entity, gridSize)) {
-                console.log(current);
-                console.log(entity);
-                current.destroyed = entity.destroyed = true;
+                current.destroy();
+                entity.destroy();
             }
         }
     }

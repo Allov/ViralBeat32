@@ -16,6 +16,7 @@ define([], function() {
         elapsedTime = 0,
         entities = [],
         assets = [],
+        debug = false,
         pause = false;
 
     var options = {
@@ -137,8 +138,23 @@ define([], function() {
                 }
             }
         },
+        toggleDebug: function() {
+            debug = !debug;
+            var debugEntities = virality.entities("debug");
+            for(var e in debugEntities) {
+                debugEntities[e].visible = debug;
+            }
+        },
         add: function(entity) {
-            if (entity.name) {
+            if (!debug && entity.systems && entity.systems.length > 0) {
+                for(var i in entity.systems) {
+                    if (entity.systems[i] == "debug") {
+                        return;
+                    }
+                }
+            }
+            
+            if (entity.name && debug) {
                 virality.log("Adding: " + entity.name, "entity");
             }
             entities.push(entity);
@@ -167,19 +183,25 @@ define([], function() {
 
             return entities;
         },
-        collide: function(a, b, gridSize) {
+        collide: function(a, b) {
+            
+            var xd = a.position.x - b.position.x;
+            var yd = a.position.y - b.position.y;
+            var distance = Math.sqrt(xd*xd + yd*yd);
+
+            if (distance > 5) return false;
+
             var left = b.position.x - b.dimensions.w / 2;
             var right = b.position.x + b.dimensions.w / 2;
             var top = b.position.y - b.dimensions.h / 2;
             var bottom = b.position.y + b.dimensions.h / 2;
             
             if (a.position.x < left) return false;
-            if (a.position.x > right) return false;
+            if (a.position.x > right+1) return false;
             if (a.position.y < top) return false;
-            if (a.position.y > bottom) return false;
+            if (a.position.y > bottom+1) return false;
             
             return true;
-            //return a.position.x >= left && a.position.x <= right && a.position.y <= bottom && a.position.y >= top;
         },
         assets: assets,
         viewport: options.viewport,
