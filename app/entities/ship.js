@@ -1,50 +1,27 @@
-define([], function() {
+define(["entities/entity"], function(Entity) {
     
-    var ship = function(graphic, input, physic, weapon, sound) {
+    var ship = function(name, graphicHandler, inputHandler, physicHandler, destroyHandler, weaponHandler, soundHandler) {
+        Entity.call(this, name, graphicHandler, inputHandler, physicHandler, destroyHandler);
+        
+        this.armor = 1;
 
-        var shielded = false,
-            position = {x: 0, y: 0},
-            velocity = {x: 0, y: 0},
-            dimensions = {w: 7, h: 7},
-            direction = {x: 1, y: 0},
-            speed = 0.05,
-            visible = true;
-
-        var self = this;
+        this.weaponHandler = weaponHandler;
+        this.soundHandler = soundHandler;
         
-        self.name = "Ship";
-        self.visible = visible;
-        self.systems = ["physic"];
-
-        self.moving = function() {
-            return self.velocity.y !== 0 || self.velocity.x !== 0;
-        };
-        
-        self.position = position;
-        self.velocity = velocity;
-        self.speed = speed;
-        self.direction = direction;
-        self.dimensions = dimensions;
-        
-        self.shoot = function() {
-            weapon.shoot(self);
-        }
-        
-        self.useShield = function() {
-            shielded = s;
-        }
-        
-        self.destroy = function() {
-            self.destroyed = true;
-            sound.destroyed();
-        }
-
-        self.update = function(context, elapsed) {
-            input.update(self, elapsed);
-            physic.update(self);
-            graphic.update(self, context);
-        };
+        this.systems.push("physic");
     }
+    
+    ship.prototype = Object.create(Entity.prototype);
+    var _super_ = Entity.prototype;
+
+    ship.prototype.shoot = function() {
+        if (this.weaponHandler) this.weaponHandler.shoot(this);
+    };
+        
+    ship.prototype.destroy = function() {
+        _super_.destroy.call(this);
+        if (this.soundHandler) this.soundHandler.destroyed();
+    };
 
     return ship;
 });

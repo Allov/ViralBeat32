@@ -14,9 +14,10 @@ define(["virality",
         var ennemyId = 0;
 
         this.spawn = function(x, y) {
-            var ennemy = new Ship(new MovingPattern(new EnnemyPatternProvider(4, "#f00")),
+            var ennemy = new Ship("ennemy", new MovingPattern(new EnnemyPatternProvider(4, "#f00")),
                                     new EnnemyAiInput(x, y),
                                     new ShipPhysic({w: 128, h: 72}),
+                                    null,
                                     new PlasmaWeapon(),
                                     DefaultShipSound);
                                     

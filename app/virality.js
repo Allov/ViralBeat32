@@ -16,13 +16,12 @@ define([], function() {
         elapsedTime = 0,
         entities = [],
         assets = [],
-        debug = false,
         pause = false;
 
     var options = {
         viewport: {},
         background: "#000",
-        debug: true,
+        debug: false,
         assetsPath: "assets/"
     };
     
@@ -139,14 +138,14 @@ define([], function() {
             }
         },
         toggleDebug: function() {
-            debug = !debug;
+            options.debug = !options.debug;
             var debugEntities = virality.entities("debug");
             for(var e in debugEntities) {
-                debugEntities[e].visible = debug;
+                debugEntities[e].visible = options.debug;
             }
         },
         add: function(entity) {
-            if (!debug && entity.systems && entity.systems.length > 0) {
+            if (!options.debug && entity.systems && entity.systems.length > 0) {
                 for(var i in entity.systems) {
                     if (entity.systems[i] == "debug") {
                         return;
@@ -154,7 +153,7 @@ define([], function() {
                 }
             }
             
-            if (entity.name && debug) {
+            if (entity.name && options.debug) {
                 virality.log("Adding: " + entity.name, "entity");
             }
             entities.push(entity);
