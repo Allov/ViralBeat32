@@ -9,6 +9,22 @@ define(["virality"], function(v) {
         shield: ["f".charCodeAt(), "F".charCodeAt()],
         debug: ["P".charCodeAt()]
     };
+
+    var buttons = {
+        up: [12],
+        down: [13],
+        left: [14],
+        right: [15],
+        shoot: [0]
+    };
+
+    var movement = {
+        up: false,
+        down: false,
+        left: false,
+        right: false,
+        shoot: false
+    };
     
     var shoot = false,
         useShield = false,
@@ -18,10 +34,13 @@ define(["virality"], function(v) {
     var input = {
         update: function(entity, elapsed) {
             input.enabled = entity.visible;
-            
+
+            evaluateGamepad();
+
             var current = Date.now();
             
             if (shoot && current - lastShoot > 200) {
+                lastShoot = current;
                 entity.shoot();
                 shoot = false;
             } else {
@@ -41,6 +60,38 @@ define(["virality"], function(v) {
         },
         enabled: true
     };
+
+    function evaluateGamepad() {
+        gamepad = navigator.getGamepads()[0];
+
+        if (!gamepad) {
+            return;
+        }
+
+        velocity.x = 0;
+        velocity.y = 0;
+
+        if (gamepad.buttons[buttons.shoot[0]].pressed) {
+            shoot = true;
+        } else {
+            shoot = false;
+        }
+
+        if (gamepad.buttons[buttons.up[0]].pressed) {
+            velocity.y = -1;
+        }
+
+        if (gamepad.buttons[buttons.down[0]].pressed) {
+            velocity.y = 1;
+        }
+        if (gamepad.buttons[buttons.left[0]].pressed) {
+            velocity.x = -1;
+        }
+
+        if (gamepad.buttons[buttons.right[0]].pressed) {
+            velocity.x = 1;
+        }
+    }
    
     window.onkeyup = function(e) {
         if (!input.enabled) {

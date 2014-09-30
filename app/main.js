@@ -4,7 +4,7 @@ define(["virality",
     function(v, FpsCounter, Stage) {
     
         // Starting Virality.
-        v.config({ debug: true })
+        v.config({ debug: false })
          .init(512, 288, "game-area")
          .background("#000")
          .start();

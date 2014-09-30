@@ -16,6 +16,7 @@ define([], function() {
         elapsedTime = 0,
         entities = [],
         assets = [],
+        gamepad = null,
         pause = false;
 
     var options = {
@@ -53,7 +54,17 @@ define([], function() {
             context = canvas.getContext("2d");
             contextBuffer = buffer.getContext("2d");
 
+            var gamepadChecker = setTimeout(function() {
+                gamepad = navigator.getGamepads()[0];
+                if (gamepad) {
+                    clearTimeout(gamepadChecker);
+                }
+            }, 50);
+
             return virality;
+        },
+        gamepad: function() {
+            return gamepad;
         },
         update: function(elapsed) {
             contextBuffer.clearRect(0, 0, options.viewport.w, options.viewport.h);

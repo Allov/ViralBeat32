@@ -2,12 +2,12 @@ define(["virality",
         "entities/ship",
         "entities/boundingbox",
         "components/movingpattern",
-        "components/ship/keyboardinput",
+        "components/ship/userinput",
         "components/ship/playerpatternprovider",
         "components/ship/shipphysic",
         "components/ship/plasmaweapon",
         "components/ship/defaultshipsound"],
-    function(v, Ship, BoundingBox, MovingPattern, KeyboardInput, ShipPatternProvider, ShipPhysic, PlasmaWeapon, DefaultShipSound) {
+    function(v, Ship, BoundingBox, MovingPattern, UserInput, ShipPatternProvider, ShipPhysic, PlasmaWeapon, DefaultShipSound) {
             
     var factory = function() {
         var self = this;
@@ -15,7 +15,7 @@ define(["virality",
         this.spawn = function(x, y) {
             var ship = new Ship("Player 1",
                                 new MovingPattern(new ShipPatternProvider(4)),
-                                KeyboardInput,
+                                UserInput,
                                 new ShipPhysic({w: 128, h: 72}),
                                 null,
                                 new PlasmaWeapon(DefaultShipSound),
