@@ -1,24 +1,24 @@
 define(["virality",
         "entities/ship",
         "entities/boundingbox",
-        "components/movingpattern",
-        "components/ship/userinput",
-        "components/ship/playerpatternprovider",
-        "components/ship/shipphysic",
-        "components/ship/plasmaweapon",
-        "components/ship/defaultshipsound"],
-    function(v, Ship, BoundingBox, MovingPattern, UserInput, ShipPatternProvider, ShipPhysic, PlasmaWeapon, DefaultShipSound) {
+        "components/userinput",
+        "components/movements/systemphysic",
+        "components/weapons/plasmagun",
+        "components/ships/movingpattern",
+        "components/ships/players/playerpatternprovider",
+        "components/ships/defaultshipsound"],
+    function(v, Ship, BoundingBox, UserInput, SystemPhysic, PlasmaGun, MovingPattern, PlayerPatternProvider, DefaultShipSound) {
             
     var factory = function() {
         var self = this;
         
         this.spawn = function(x, y) {
             var ship = new Ship("Player 1",
-                                new MovingPattern(new ShipPatternProvider(4)),
+                                new MovingPattern(new PlayerPatternProvider(4)),
                                 UserInput,
-                                new ShipPhysic({w: 128, h: 72}),
+                                new SystemPhysic({w: 128, h: 72}, "projectile"),
                                 null,
-                                new PlasmaWeapon(DefaultShipSound),
+                                new PlasmaGun(DefaultShipSound),
                                 DefaultShipSound);
                                 
             ship.visible = false;

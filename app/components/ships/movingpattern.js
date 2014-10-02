@@ -1,4 +1,4 @@
-define(["components/patternbuffer"], function(PatternBuffer) {
+define(["components/graphics/patternbuffer"], function(PatternBuffer) {
     
     var pattern = function(patternProvider) {
         var self = this;

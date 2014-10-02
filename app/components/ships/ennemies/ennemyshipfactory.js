@@ -1,24 +1,25 @@
 define(["virality",
         "entities/ship",
         "entities/boundingbox",
-        "components/movingpattern",
-        "components/ship/ennemypatternprovider",
-        "components/ship/ennemyaiinput",
-        "components/ship/shipphysic",
-        "components/ship/plasmaweapon",
-        "components/ship/defaultshipsound"],
-    function(v, Ship, BoundingBox, MovingPattern, EnnemyPatternProvider, EnnemyAiInput, ShipPhysic, PlasmaWeapon, DefaultShipSound) {
+        "components/movements/smovement",
+        "components/movements/systemphysic",
+        "components/weapons/plasmagun",
+        "components/ships/movingpattern",
+        "components/ships/ennemies/ennemypatternprovider",
+        "components/ships/defaultshipsound"],
+    function(v, Ship, BoundingBox, SMovement, SystemPhysic, PlasmaGun, MovingPattern, EnnemyPatternProvider, DefaultShipSound) {
 
     var factory = function() {
         var self = this;
         var ennemyId = 0;
 
         this.spawn = function(x, y) {
-            var ennemy = new Ship("ennemy", new MovingPattern(new EnnemyPatternProvider(4, "#f00")),
-                                    new EnnemyAiInput(x, y),
-                                    new ShipPhysic({w: 128, h: 72}),
+            var ennemy = new Ship("ennemy", 
+                                    new MovingPattern(new EnnemyPatternProvider(4, "#f00")),
+                                    new SMovement(x, y),
+                                    new SystemPhysic({w: 128, h: 72}, "projectile"),
                                     null,
-                                    new PlasmaWeapon(),
+                                    new PlasmaGun(),
                                     DefaultShipSound);
                                     
             ennemy.dimensions.w = 3;

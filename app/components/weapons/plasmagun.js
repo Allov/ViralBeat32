@@ -1,10 +1,10 @@
 define(["virality",
         "entities/projectile",
         "entities/boundingbox",
-        "components/ship/projectilepatternprovider",
-        "components/ship/plasmaweaponinput",
-        "components/ship/projectilephysic"],
-    function(v, Projectile, BoundingBox, ProjectilePatternProvider, PlasmaWeaponInput, ProjectilePhysic) {
+        "components/weapons/projectilepatternprovider",
+        "components/movements/entitydirectionmovement",
+        "components/movements/outofboundphysic"],
+    function(v, Projectile, BoundingBox, ProjectilePatternProvider, EntityDirectionMovement, OutOfBoundPhysic) {
    
     var weapon = function(sound) {
        
@@ -16,8 +16,8 @@ define(["virality",
 
             var projectile = new Projectile(entity.name + "-plasma-" + plasmaId,
                                             new ProjectilePatternProvider(4),
-                                            new PlasmaWeaponInput(),
-                                            new ProjectilePhysic({w: 128, h: 72}));
+                                            new EntityDirectionMovement(),
+                                            new OutOfBoundPhysic({w: 128, h: 72}));
             
             projectile.systems.push("physic");
             projectile.systems.push("projectile");

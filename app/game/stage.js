@@ -1,11 +1,9 @@
 define(["virality",
-        "components/fontpatternprovider",
-        "components/textpattern",
-        "entities/text",
+        "components/graphics/textfactory",
         "entities/starfield",
-        "components/ship/playershipfactory",
-        "components/ship/ennemyshipfactory"],
-    function(v, FontPatternProvider, TextPattern, Text, Starfield, PlayerShipFactory, EnnemyShipFactory) {
+        "components/ships/players/playershipfactory",
+        "components/ships/ennemies/ennemyshipfactory"],
+    function(v, TextFactory, Starfield, PlayerShipFactory, EnnemyShipFactory) {
 
     var stage = function() {
         var self = this;
@@ -13,24 +11,21 @@ define(["virality",
         self.name = "Stage";
         self.visible = true;
 
+        self.grid = {w: 128, h: 72};
+
         var date = Date.now();
         
         v.add(new Starfield({ size: 4, starCount: 150}));
 
-        var playerShipFactory = new PlayerShipFactory();
+        var playerShipFactory = new PlayerShipFactory(self.grid);
         var mainShip = playerShipFactory.spawn(0, 0);
 
-        var ennemyShipFactory = new EnnemyShipFactory();
+        var ennemyShipFactory = new EnnemyShipFactory(self.grid);
         
         for(var i = 0; i < 10; i++) {
             ennemyShipFactory.spawn(127, 10+i*5);
         }
-
                                 
-        var text = new Text(new TextPattern(new FontPatternProvider()),
-                            "stage", 1, 12, "#fff");
-        //v.add(text);
-
         self.update = function() {
             var current = Date.now();
 

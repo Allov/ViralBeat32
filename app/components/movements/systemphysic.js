@@ -1,14 +1,14 @@
 define(["virality"], function(v) {
     
-    var physic = function(gridSize) {
+    var physic = function(gridSize, system) {
         var self = this;
 
         self.update = function(entity) {
-            detectScreenCollisions(entity, gridSize);
+            detectScreenCollisions(entity, gridSize, system);
         }
     }
 
-    function detectScreenCollisions(entity, gridSize) {
+    function detectScreenCollisions(entity, gridSize, system) {
         if (entity.position.x < 0) {
             entity.position.x = 0;
         }
@@ -25,7 +25,7 @@ define(["virality"], function(v) {
             entity.position.y = gridSize.h - entity.dimensions.h;
         }
         
-        var entities = v.entities("projectile");
+        var entities = v.entities(system);
         for(var i in entities) {
             var current = entities[i];
             
